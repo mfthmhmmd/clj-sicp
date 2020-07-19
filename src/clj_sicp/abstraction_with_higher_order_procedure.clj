@@ -56,7 +56,10 @@
 
 (* 8 (sum pi-term 1 pi-next 10000))
 
+
 ;; Find Integral
+
+
 (defn integral [f a b dx]
   (* (sum f (+ a (/ dx 2.0)) (partial + dx) b) dx))
 
@@ -69,8 +72,8 @@
   (letfn [(h [] (/ (- b a) n))
           (yk [k] (f (+ a (* (h) k))))
           (simpsons [k] (* (cond (or (= k 0) (= k n)) 1
-                                 (= even? k) 4
-                                 (= odd? k) 2)) (yk k))]
+                                 (= even? k)          4
+                                 (= odd? k)           2)) (yk k))]
     (* (/ (h) 3)
        (sum simpsons 0 inc n))))
 
@@ -85,3 +88,26 @@
     (iter a 0)))
 
 (sum identity 1 inc 10)
+
+;; 1.31 Product
+(defn product [term a next b]
+  (letfn [(iter [a result]
+            (if (> a b) result
+                (iter (next a) (* result (term a)))))]
+    (iter a 1)))
+
+(product identity 1 inc 5)
+
+(defn factorial [n]
+  (product identity 1 inc n))
+(factorial 5)
+
+(defn wallis-term [n]
+  (*' (*' 2.0 n) (- (*' 2.0 n) 1)
+      (/ (*' 2.0 n) (+ (*' 2.0 n) 1))))
+
+(defn wallis-product [r]
+  (product wallis-term 1 inc r))
+
+(wallis-product 100)
+

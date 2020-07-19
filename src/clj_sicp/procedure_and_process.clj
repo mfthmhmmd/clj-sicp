@@ -1,4 +1,5 @@
-(ns clj-sicp.procedure_and_process)
+(ns clj-sicp.procedure_and_process
+  (:gen-class))
 
 (defn fact-iter [result n counter]
   (if (= counter n) result
@@ -17,7 +18,7 @@
 
 (defn plus [a b]
   (if (= a 0) b
-      #dbg (inc (plus (dec a) b))))
+      (inc (plus (dec a) b))))
 
 (inc (+ 1 3))
 (inc (+ 0 3))
@@ -76,14 +77,13 @@
 (f 12)
 
 (defn f [n]
-  #dbg
-   (loop [a 2 b 1 c 0 counter (- n 2)]
-     (cond (< n 3) n
-           (<= counter 0) a
-           :else (recur (+ a (* 2 b) (* 3 c))
-                        a
-                        b
-                        (dec counter)))))
+  (loop [a 2 b 1 c 0 counter (- n 2)]
+    (cond (< n 3)        n
+          (<= counter 0) a
+          :else          (recur (+ a (* 2 b) (* 3 c))
+                                a
+                                b
+                                (dec counter)))))
 
 (f 5)
 
@@ -140,7 +140,6 @@
 
 
 (defn gcd [a b]
-  # dbg
   (if (= b 0) a
       (gcd b (mod a b))))
 
