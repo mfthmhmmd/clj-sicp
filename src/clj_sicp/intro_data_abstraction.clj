@@ -89,19 +89,48 @@
 
 
 ;; Exercise 2.5
-(defn weird-cons [x y]
-  (* (Math/pow 2 x) (Math/pow 3 y)))
+;; (defn weird-cons [x y]
+;;   (* (Math/pow 2 x) (Math/pow 3 y)))
 
-(def c (weird-cons 3 5))
-(def a (Math/pow 2 3))
-(def b (Math/pow 3 5))
-(* a b)
-(/ (Math/log a) (Math/log 2))
+;; (def c (weird-cons 3 5))
+;; (def a (Math/pow 2 3))
+;; (def b (Math/pow 3 5))
+;; (* a b)
+;; (/ (Math/log a) (Math/log 2))
 
-(defn weird-car [num]
-  (let [c (Math/log)]))
+;; (defn weird-car [num]
+;;   (let [c (Math/log)]))
 
-(defn weird-cdr [num]
-  (rem num 3))
+;; (defn weird-cdr [num]
+;;   (rem num 3))
 
-(weird-car c)
+;; (weird-car c)
+
+;; Exercise 2.6
+
+
+(comment
+  ;;if zero is
+  (def zero (fn [f] (fn [x] x)))
+
+  ;;and add-1
+  (defn add-1 [n] (fn [f]
+                    (fn [x]
+                      (f ((n f) x)))))
+
+  (add-1 zero)
+
+  ;; we could rewrite zero like this (?)
+  (defn zero [f x] x)
+  (zero 1 0)
+
+  ;; so one become
+  (defn one [f x] f)
+  (one 1 0)
+  )
+
+
+;; (defn add-1 [n]
+;;   (fn [f] (fn [x] (f ((n f) x)))))
+
+;; ((zero +) 3)
